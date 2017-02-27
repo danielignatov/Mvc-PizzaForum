@@ -1,0 +1,29 @@
+Database:
+-User
+--Id, Username, Password, Email, Role, AvatarUrl, (List of Topic)
+-Category
+--Id, Name, (List of Topic)
+-Topic
+--Id, Title, Content, Author (User), PublishDate, (List of Reply)
+-Reply
+--Id, Content, Author (User), PublishDate
+-Login
+--Id, User, IsActive, SessionId
+
+Controllers:
+-HomeController
+--Index (Display all categories)
+--Category ?id=
+--Topic ?id=
+-UserController
+--Login
+--Register
+--Profile ?id=
+--Edit
+--Logout
+
+BindingModels
+-RegisterUserBindingModel
+--Username, Password, PasswordConfirm
+-LoginUserBindingModel
+-
