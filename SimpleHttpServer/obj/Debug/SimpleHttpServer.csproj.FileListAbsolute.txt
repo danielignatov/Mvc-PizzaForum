@@ -6,3 +6,11 @@ C:\Users\stil2\Desktop\MVC-SharpStore-Skeleton\MVC-SharpStore-Skeleton\SimpleHtt
 C:\Users\stil2\Desktop\MVC-SharpStore-Skeleton\MVC-SharpStore-Skeleton\SimpleHttpServer\obj\Debug\SimpleHttpServer.csprojResolveAssemblyReference.cache
 C:\Users\stil2\Desktop\MVC-SharpStore-Skeleton\MVC-SharpStore-Skeleton\SimpleHttpServer\obj\Debug\SimpleHttpServer.dll
 C:\Users\stil2\Desktop\MVC-SharpStore-Skeleton\MVC-SharpStore-Skeleton\SimpleHttpServer\obj\Debug\SimpleHttpServer.pdb
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\SimpleHttpServer\bin\Debug\Resources\Pages\404.html
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\SimpleHttpServer\bin\Debug\Resources\Pages\500.html
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\SimpleHttpServer\bin\Debug\SimpleHttpServer.dll.config
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\SimpleHttpServer\bin\Debug\SimpleHttpServer.dll
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\SimpleHttpServer\bin\Debug\SimpleHttpServer.pdb
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\SimpleHttpServer\obj\Debug\SimpleHttpServer.csprojResolveAssemblyReference.cache
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\SimpleHttpServer\obj\Debug\SimpleHttpServer.dll
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\SimpleHttpServer\obj\Debug\SimpleHttpServer.pdb

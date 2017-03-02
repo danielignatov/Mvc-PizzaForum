@@ -8,3 +8,12 @@ C:\Users\stil2\Desktop\MVC-SharpStore-Skeleton\MVC-SharpStore-Skeleton\SimpleMVC
 C:\Users\stil2\Desktop\MVC-SharpStore-Skeleton\MVC-SharpStore-Skeleton\SimpleMVC\bin\Debug\SimpleHttpServer.dll.config
 C:\Users\stil2\Desktop\MVC-SharpStore-Skeleton\MVC-SharpStore-Skeleton\SimpleMVC\obj\Debug\SimpleMVC.dll
 C:\Users\stil2\Desktop\MVC-SharpStore-Skeleton\MVC-SharpStore-Skeleton\SimpleMVC\obj\Debug\SimpleMVC.pdb
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\SimpleMVC\bin\Debug\Resources\Pages\404.html
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\SimpleMVC\bin\Debug\Resources\Pages\500.html
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\SimpleMVC\bin\Debug\SimpleMVC.dll
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\SimpleMVC\bin\Debug\SimpleMVC.pdb
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\SimpleMVC\bin\Debug\SimpleHttpServer.dll
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\SimpleMVC\bin\Debug\SimpleHttpServer.pdb
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\SimpleMVC\obj\Debug\SimpleMVC.csprojResolveAssemblyReference.cache
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\SimpleMVC\obj\Debug\SimpleMVC.dll
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\SimpleMVC\obj\Debug\SimpleMVC.pdb

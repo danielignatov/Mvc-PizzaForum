@@ -81,6 +81,22 @@
                     },
                     new Route()
                     {
+                        Name = "CSS",
+                        Method = RequestMethod.GET,
+                        UrlRegex = "/css/style.css$",
+                        Callable = (request) =>
+                        {
+                            var response = new HttpResponse()
+                            {
+                                StatusCode = ResponseStatusCode.Ok,
+                                ContentAsUTF8 = File.ReadAllText("../../Content/css/style.css")
+                            };
+                            response.Header.ContentType = "text/css";
+                            return response;
+                        }
+                    },
+                    new Route()
+                    {
                         Name = "Images",
                         Method = RequestMethod.GET,
                         UrlRegex = "/images/(.)+.png$",

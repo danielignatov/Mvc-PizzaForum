@@ -1,1 +1,16 @@
 C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\PizzaForumApplication\bin\Debug\PizzaForumApplication.exe.config
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\PizzaForumApplication\bin\Debug\Resources\Pages\404.html
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\PizzaForumApplication\bin\Debug\Resources\Pages\500.html
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\PizzaForumApplication\bin\Debug\PizzaForumApplication.exe
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\PizzaForumApplication\bin\Debug\PizzaForumApplication.pdb
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\PizzaForumApplication\bin\Debug\EntityFramework.dll
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\PizzaForumApplication\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\PizzaForumApplication\bin\Debug\SimpleHttpServer.dll
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\PizzaForumApplication\bin\Debug\SimpleMVC.dll
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\PizzaForumApplication\bin\Debug\SimpleHttpServer.pdb
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\PizzaForumApplication\bin\Debug\SimpleMVC.pdb
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\PizzaForumApplication\bin\Debug\EntityFramework.xml
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\PizzaForumApplication\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\PizzaForumApplication\obj\Debug\PizzaForumApplication.csprojResolveAssemblyReference.cache
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\PizzaForumApplication\obj\Debug\PizzaForumApplication.exe
+C:\Users\Даниел\Documents\GitHub\Mvc-PizzaForum\PizzaForumApplication\obj\Debug\PizzaForumApplication.pdb

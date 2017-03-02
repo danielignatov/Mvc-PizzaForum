@@ -20,6 +20,8 @@
 
         public virtual User Author { get; set; }
 
+        public virtual Category Category { get; set; }
+
         public DateTime PublishDate { get; set; }
 
         public virtual ICollection<Reply> Replies { get; set; }

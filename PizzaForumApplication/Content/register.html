@@ -1,20 +1,20 @@
 <div class="container">
-	<form method="POST" action="">
+	<form method="POST" action="/forum/register">
 		<label>Username</label>
 		<div class="form-group">
-			<input type="text" class="form-control" placeholder="Enter username">
+			<input type="text" name="Username" class="form-control" placeholder="Enter username">
 		</div>
 		<label>Email</label>
 		<div class="form-group">
-			<input type="text" class="form-control" placeholder="Enter email">
+			<input type="text" name="Email" class="form-control" placeholder="Enter email">
 		</div>
 		<label>Password</label>
 		<div class="form-group">
-			<input type="password" class="form-control" placeholder="Enter password">
+			<input type="password" name="Password" class="form-control" placeholder="Enter password">
 		</div>
 		<label>Confirm Password</label>
 		<div class="form-group">
-			<input type="password" class="form-control" placeholder="Confirm password">
+			<input type="password" name="PasswordConfirm" class="form-control" placeholder="Confirm password">
 		</div>
 		<input type="reset" class="btn btn-danger" value="Clear"/>
 		<input type="submit" class="btn btn-success" value="Register"/>

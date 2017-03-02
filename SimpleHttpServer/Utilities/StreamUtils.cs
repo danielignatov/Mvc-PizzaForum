@@ -21,6 +21,7 @@ namespace SimpleHttpServer.Utilities
             }
             return data.ToString();
         }
+
         public static void WriteResponse(Stream stream, HttpResponse response)
         {
             byte[] responseHeader = Encoding.UTF8.GetBytes(response.ToString());
