@@ -76,5 +76,26 @@
             this.Context.Topics.Add(topic);
             this.Context.SaveChanges();
         }
+
+        public void DeleteTopic(int id)
+        {
+            this.Context.Topics.Remove(this.Context.Topics.Find(id));
+            this.Context.SaveChanges();
+        }
+
+        public bool CanThisUserDeleteGivenTopic(HttpSession session, int id)
+        {
+            if (this.signInManagerService.GetAuthenticatedUser(session).Topics.Any(tid => tid.Id == id))
+            {
+                return true;
+            }
+
+            if (this.signInManagerService.GetAuthenticatedUser(session).Role == Enums.UserRole.Administrator)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

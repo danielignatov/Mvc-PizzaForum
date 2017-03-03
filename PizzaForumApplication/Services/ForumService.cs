@@ -8,12 +8,16 @@
     using System.Text.RegularExpressions;
     using SimpleHttpServer.Models;
     using SimpleHttpServer.Utilities;
+    using ViewModels;
+    using System.Collections.Generic;
 
     public class ForumService : Service
     {
+        private SignInManagerService signInManagerService;
+
         public ForumService()
         {
-
+            this.signInManagerService = new SignInManagerService();
         }
 
         public User GetCorrespondingLoginUser(LoginUserBindingModel lubm)
@@ -91,6 +95,66 @@
             }
 
             return true;
+        }
+
+        public ForumProfileViewModel GenerateForumProfileViewModel(HttpSession session, int id)
+        {
+            ForumProfileViewModel fpvm = new ForumProfileViewModel();
+            NavbarViewModel nvm = new NavbarViewModel();
+            List<TopicViewModel> ltvp = new List<TopicViewModel>();
+
+            fpvm.ProfileId = id;
+            fpvm.ProfileName = this.Context.Users.Where(i => i.Id == id).Select(n => n.Username).FirstOrDefault();
+
+            if (this.signInManagerService.IsAuthenticated(session))
+            {
+                var user = this.signInManagerService.GetAuthenticatedUser(session);
+
+                nvm.LoggedIn = true;
+                nvm.UserId = user.Id;
+                nvm.Username = user.Username;
+                nvm.UserLevel = (int)user.Role;
+            }
+            else
+            {
+                nvm.LoggedIn = false;
+            }
+
+            // May throw exception
+            foreach (var topic in this.Context.Topics.Where(i => i.Author.Id == id))
+            {
+                TopicViewModel tvm = new TopicViewModel();
+
+                tvm.TopicName = topic.Title;
+                tvm.TopicId = topic.Id;
+                tvm.PublishedOn = topic.PublishDate;
+
+                CategoryViewModel cvm = new CategoryViewModel()
+                {
+                    CategoryName = topic.Category.Name,
+                    CategoryId = topic.Category.Id
+                };
+
+                tvm.Category = cvm;
+
+                List<ReplyViewModel> lrvm = new List<ReplyViewModel>();
+
+                foreach (var reply in topic.Replies)
+                {
+                    ReplyViewModel rvm = new ReplyViewModel();
+
+                    lrvm.Add(rvm);
+                }
+
+                tvm.Replies = lrvm;
+
+                ltvp.Add(tvm);
+            }
+
+            fpvm.Navbar = nvm;
+            fpvm.Topics = ltvp;
+
+            return fpvm;
         }
 
         public void RegisterUserFromBindingModel(RegisterUserBindingModel rubm)

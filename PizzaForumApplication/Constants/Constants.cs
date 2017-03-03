@@ -25,5 +25,7 @@
         public static string AdminCategoryEditFormPath = $"/admin-category-edit.html";
 
         public static string NewTopicButtonPath = $"/topic-new-button.html";
+
+        public static string ProfilePagePath = $"/profile.html";
     }
 }

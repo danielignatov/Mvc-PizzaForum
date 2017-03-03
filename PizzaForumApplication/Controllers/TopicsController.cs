@@ -57,5 +57,21 @@ namespace PizzaForumApplication.Controllers
 
             return this.View(tnvm);
         }
+
+        // Delete
+        [HttpGet]
+        public IActionResult Delete(HttpResponse response, HttpSession session, int id)
+        {
+            if (this.signInManagerService.IsAuthenticated(session))
+            {
+                if (this.topicsService.CanThisUserDeleteGivenTopic(session, id))
+                {
+                    this.topicsService.DeleteTopic(id);
+                }
+            }
+
+            this.Redirect(response, "/home/topics");
+            return null;
+        }
     }
 }

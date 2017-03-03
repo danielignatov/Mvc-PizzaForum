@@ -6,14 +6,18 @@
     using SimpleHttpServer.Models;
     using SimpleMVC.Attributes.Methods;
     using SimpleMVC.Controllers;
+    using ViewModels;
+    using SimpleMVC.Interfaces.Generic;
 
     public class ForumController : Controller
     {
         private ForumService forumService;
+        private SignInManagerService signInManagerService;
 
         public ForumController()
         {
             this.forumService = new ForumService();
+            this.signInManagerService = new SignInManagerService();
         }
 
         // Login
@@ -67,6 +71,21 @@
         {
             this.forumService.Logout(response, session.Id);
             this.Redirect(response, "/home/topics");
+        }
+
+        // Profile
+        [HttpGet]
+        public IActionResult<ForumProfileViewModel> Profile(HttpResponse response, HttpSession session, int id)
+        {
+            if (this.signInManagerService.IsAuthenticated(session))
+            {
+                ForumProfileViewModel fpvm = this.forumService.GenerateForumProfileViewModel(session, id);
+
+                return this.View(fpvm);
+            }
+
+            this.Redirect(response, "/home/topics");
+            return null;
         }
     }
 }

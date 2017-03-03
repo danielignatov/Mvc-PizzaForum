@@ -84,6 +84,7 @@
     <Compile Include="ViewModels\CategoriesAllViewModel.cs" />
     <Compile Include="ViewModels\CategoriesEditViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\ForumProfileViewModel.cs" />
     <Compile Include="ViewModels\HomeCategoriesViewModel.cs" />
     <Compile Include="ViewModels\HomeTopicsViewModel.cs" />
     <Compile Include="ViewModels\NavbarViewModel.cs" />
