@@ -22,11 +22,15 @@
         public TopicsNewViewModel GenerateTopicsNewViewModel(HttpSession session)
         {
             TopicsNewViewModel tnvm = new TopicsNewViewModel();
+            NavbarViewModel nvm = new NavbarViewModel();
+            List<CategoryViewModel> lcvm = new List<CategoryViewModel>();
 
-            tnvm.UserId = this.signInManagerService.GetAuthenticatedUser(session).Id;
-            tnvm.Username = this.signInManagerService.GetAuthenticatedUser(session).Username;
-            tnvm.UserLevel = (int)this.signInManagerService.GetAuthenticatedUser(session).Role;
-            List<CategoryViewModel> categoryViewModelList = new List<CategoryViewModel>();
+            var user = this.signInManagerService.GetAuthenticatedUser(session);
+
+            nvm.UserId = user.Id;
+            nvm.Username = this.signInManagerService.GetAuthenticatedUser(session).Username;
+            nvm.UserLevel = (int)user.Role;
+            nvm.LoggedIn = true;
 
             foreach (var category in this.Context.Categories)
             {
@@ -35,10 +39,11 @@
                 categoryViewModel.CategoryName = category.Name;
                 categoryViewModel.CategoryId = category.Id;
 
-                categoryViewModelList.Add(categoryViewModel);
+                lcvm.Add(categoryViewModel);
             }
 
-            tnvm.Categories = categoryViewModelList;
+            tnvm.Navbar = nvm;
+            tnvm.Categories = lcvm;
 
             return tnvm;
         }

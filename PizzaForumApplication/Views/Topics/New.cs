@@ -1,8 +1,6 @@
 ﻿namespace PizzaForumApplication.Views.Topics
 {
-    using SimpleMVC.Interfaces;
     using SimpleMVC.Interfaces.Generic;
-    using System;
     using System.IO;
     using System.Text;
     using ViewModels;
@@ -13,14 +11,42 @@
 
         public string Render()
         {
-            string header = File.ReadAllText("../../Content/header.html");
-            string navigation = File.ReadAllText("../../Content/nav-logged.html");
-            string newTopicForm = File.ReadAllText("../../Content/topic-new-form.html");
-            string footer = File.ReadAllText("../../Content/footer.html");
+            StringBuilder topicsNewPageBuilder = new StringBuilder();
 
-            navigation = navigation.Replace("##userid##", $"{Model.UserId}");
-            navigation = navigation.Replace("##username##", $"{Model.Username}");
+            // Header
+            topicsNewPageBuilder.Append(File.ReadAllText(Constants.Constants.ContentPath + Constants.Constants.HeaderPath));
 
+            // Navigation
+            string nav;
+
+            if (Model.Navbar.LoggedIn == true)
+            {
+                nav = File.ReadAllText(Constants.Constants.ContentPath + Constants.Constants.NavbarLoggedPath);
+
+                if (Model.Navbar.UserLevel == 3)
+                {
+                    string adminButton = File.ReadAllText(Constants.Constants.ContentPath + Constants.Constants.AdminNavButton);
+
+                    nav = nav.Replace("##admindropdownmenu##", adminButton);
+                }
+                else
+                {
+                    nav = nav.Replace("##admindropdownmenu##", "");
+                }
+
+                nav = nav.Replace("##userid##", Model.Navbar.UserId.ToString());
+                nav = nav.Replace("##username##", Model.Navbar.Username);
+            }
+            else
+            {
+                nav = File.ReadAllText(Constants.Constants.ContentPath + Constants.Constants.NavbarNotLoggedPath);
+            }
+
+            topicsNewPageBuilder.Append(nav);
+
+            // Page Content - New Topic Form
+            string container = File.ReadAllText(Constants.Constants.ContentPath + Constants.Constants.ContainerPath);
+            string newTopicForm = File.ReadAllText(Constants.Constants.ContentPath + Constants.Constants.NewTopicFormPath);
             StringBuilder categorySelectBuilder = new StringBuilder();
 
             foreach (var category in Model.Categories)
@@ -29,8 +55,14 @@
             }
 
             newTopicForm = newTopicForm.Replace("##categories##", $"{categorySelectBuilder.ToString()}");
+            container = container.Replace("##content##", newTopicForm);
+
+            topicsNewPageBuilder.Append(container);
+
+            // Footer
+            topicsNewPageBuilder.Append(File.ReadAllText(Constants.Constants.ContentPath + Constants.Constants.FooterPath));
             
-            return header + navigation + "<div class=\"container\">" + newTopicForm + "</div>" + footer;
+            return topicsNewPageBuilder.ToString();
         }
     }
 }

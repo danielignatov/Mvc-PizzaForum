@@ -3,6 +3,7 @@ using PizzaForumApplication.ViewModels;
 using SimpleHttpServer.Models;
 using System.Linq;
 using System.Collections.Generic;
+using PizzaForumApplication.Models;
 
 namespace PizzaForumApplication.Services
 {
@@ -18,17 +19,23 @@ namespace PizzaForumApplication.Services
         public HomeTopicsViewModel GenerateHomeTopicsViewModel(HttpSession session)
         {
             HomeTopicsViewModel viewModel = new HomeTopicsViewModel();
+            NavbarViewModel nvm = new NavbarViewModel();
 
             if (this.signInManagerService.IsAuthenticated(session))
             {
-                viewModel.IsUserLogged = true;
-                viewModel.Username = this.signInManagerService.GetAuthenticatedUser(session).Username;
-                viewModel.UserId = this.signInManagerService.GetAuthenticatedUser(session).Id;
+                User user = this.signInManagerService.GetAuthenticatedUser(session);
+
+                nvm.LoggedIn = true;
+                nvm.Username = user.Username;
+                nvm.UserId = user.Id;
+                nvm.UserLevel = (int)user.Role;
             }
             else
             {
-                viewModel.IsUserLogged = false;
+                nvm.LoggedIn = false;
             }
+
+            viewModel.Navbar = nvm;
 
             foreach (var topic in this.Context.Topics.OrderByDescending(t => t.PublishDate).Take(10))
             {
@@ -66,6 +73,43 @@ namespace PizzaForumApplication.Services
             }
 
             return viewModel;
+        }
+
+        public HomeCategoriesViewModel GenerateHomeCategoriesViewModel(HttpSession session)
+        {
+            HomeCategoriesViewModel hcvm = new HomeCategoriesViewModel();
+            NavbarViewModel nvm = new NavbarViewModel();
+            List<CategoryViewModel> lcvm = new List<CategoryViewModel>();
+
+            if (this.signInManagerService.IsAuthenticated(session))
+            {
+                var user = this.signInManagerService.GetAuthenticatedUser(session);
+
+                nvm.LoggedIn = true;
+                nvm.UserId = user.Id;
+                nvm.Username = user.Username;
+                nvm.UserLevel = (int)user.Role;
+            }
+            else
+            {
+                nvm.LoggedIn = false;
+            }
+
+            foreach (var category in this.Context.Categories)
+            {
+                CategoryViewModel cvm = new CategoryViewModel()
+                {
+                    CategoryName = category.Name,
+                    CategoryId = category.Id
+                };
+
+                lcvm.Add(cvm);
+            }
+
+            hcvm.Navbar = nvm;
+            hcvm.Categories = lcvm;
+
+            return hcvm;
         }
     }
 }

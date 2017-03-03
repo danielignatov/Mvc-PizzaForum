@@ -2,7 +2,8 @@
 	<form method="POST">
 		<label>Name</label>
 		<div class="form-group">
-			<input type="text" class="form-control" value="{value of current name}"/>
+			<input type="hidden" value="##categoryname##" name="OldName" />
+			<input type="text" class="form-control" value="##categoryname##" name="NewName" />
 		</div>
 		<input type="submit" class="btn btn-primary" value="Edit Category"/>
 	</form>

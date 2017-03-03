@@ -1,13 +1,8 @@
 ﻿namespace PizzaForumApplication.Views.Home
 {
-    using SimpleMVC.Interfaces;
     using SimpleMVC.Interfaces.Generic;
-    using System;
-    using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
     using System.Text;
-    using System.Threading.Tasks;
     using ViewModels;
 
     public class Topics : IRenderable<HomeTopicsViewModel>
@@ -16,31 +11,62 @@
 
         public string Render()
         {
-            string header = File.ReadAllText("../../Content/header.html");
-            string navigation;
-            string newTopicButton = "<br>";
-            StringBuilder topicsBuilder = new StringBuilder();
+            StringBuilder homeTopicsPageBuilder = new StringBuilder();
 
-            if (Model.IsUserLogged)
+            // Header
+            homeTopicsPageBuilder.Append(File.ReadAllText(Constants.Constants.ContentPath + Constants.Constants.HeaderPath));
+
+            // Navigation
+            string nav;
+
+            if (Model.Navbar.LoggedIn == true)
             {
-                navigation = File.ReadAllText("../../Content/nav-logged.html");
-                navigation = navigation.Replace("##userid##", $"{Model.UserId}");
-                navigation = navigation.Replace("##username##", $"{Model.Username}");
-                newTopicButton = File.ReadAllText("../../Content/topic-new-button.html");
+                nav = File.ReadAllText(Constants.Constants.ContentPath + Constants.Constants.NavbarLoggedPath);
+
+                if (Model.Navbar.UserLevel == 3)
+                {
+                    string adminButton = File.ReadAllText(Constants.Constants.ContentPath + Constants.Constants.AdminNavButton);
+
+                    nav = nav.Replace("##admindropdownmenu##", adminButton);
+                }
+                else
+                {
+                    nav = nav.Replace("##admindropdownmenu##", "");
+                }
+
+                nav = nav.Replace("##userid##", Model.Navbar.UserId.ToString());
+                nav = nav.Replace("##username##", Model.Navbar.Username);
             }
             else
             {
-                navigation = File.ReadAllText("../../Content/nav-not-logged.html");
+                nav = File.ReadAllText(Constants.Constants.ContentPath + Constants.Constants.NavbarNotLoggedPath);
             }
+
+            homeTopicsPageBuilder.Append(nav);
+            
+            // Page Content - New Topic Button if user logged in
+            if (Model.Navbar.LoggedIn == true)
+            {
+                homeTopicsPageBuilder.Append(File.ReadAllText(Constants.Constants.ContentPath + Constants.Constants.NewTopicButtonPath));
+            }
+
+            // Page Content - Last 10 Topics by date
+            StringBuilder topicsBuilder = new StringBuilder();
+            string container = File.ReadAllText(Constants.Constants.ContentPath + Constants.Constants.ContainerPath);
 
             foreach (var topic in Model.Topics)
             {
                 topicsBuilder.Append($"<div class=\"thumbnail\"><h4><strong><a href=\"/topics/details?id={topic.TopicId}\">{topic.TopicName}</a><strong> <small><a href=\"/categories/topics?categoryname={topic.Category.CategoryName}\">{topic.Category.CategoryName}</a></small></h4><p><a href=\"/forum/profile?id={topic.Author.UserId}\">{topic.Author.Username}</a> | Replies: {topic.Replies.Count} | {topic.PublishedOn.ToShortDateString()}</p></div>");
             }
-            
-            string footer = File.ReadAllText("../../Content/footer.html");
 
-            return header + navigation + "<div class=\"container\">" + newTopicButton + topicsBuilder.ToString() + "</div>" + footer;
+            container = container.Replace("##content##", topicsBuilder.ToString());
+
+            homeTopicsPageBuilder.Append(container);
+
+            // Footer
+            homeTopicsPageBuilder.Append(File.ReadAllText(Constants.Constants.ContentPath + Constants.Constants.FooterPath));
+
+            return homeTopicsPageBuilder.ToString();
         }
     }
 }

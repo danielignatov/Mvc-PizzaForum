@@ -56,8 +56,11 @@
   <ItemGroup>
     <Compile Include="AppStart.cs" />
     <Compile Include="BindingModels\LoginUserBindingModel.cs" />
+    <Compile Include="BindingModels\NewCategoryBindingModel.cs" />
     <Compile Include="BindingModels\NewTopicBindingModel.cs" />
     <Compile Include="BindingModels\RegisterUserBindingModel.cs" />
+    <Compile Include="BindingModels\RenameCategoryBindingModel.cs" />
+    <Compile Include="Constants\Constants.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ForumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -78,17 +81,27 @@
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\ForumService.cs" />
     <Compile Include="Services\TopicsService.cs" />
+    <Compile Include="ViewModels\CategoriesAllViewModel.cs" />
+    <Compile Include="ViewModels\CategoriesEditViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\HomeCategoriesViewModel.cs" />
     <Compile Include="ViewModels\HomeTopicsViewModel.cs" />
+    <Compile Include="ViewModels\NavbarViewModel.cs" />
     <Compile Include="ViewModels\TopicsNewViewModel.cs" />
     <Compile Include="ViewModels\ReplyViewModel.cs" />
     <Compile Include="ViewModels\TopicViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="Views\Categories\All.cs" />
+    <Compile Include="Views\Categories\Edit.cs" />
+    <Compile Include="Views\Categories\New.cs" />
     <Compile Include="Views\Forum\Login.cs" />
+    <Compile Include="Views\Forum\Logout.cs" />
+    <Compile Include="Views\Forum\Profile.cs" />
     <Compile Include="Views\Forum\Register.cs" />
+    <Compile Include="Views\Home\Categories.cs" />
     <Compile Include="Views\Home\Index.cs" />
     <Compile Include="Views\Home\Topics.cs" />
+    <Compile Include="Views\Topics\Details.cs" />
     <Compile Include="Views\Topics\New.cs" />
   </ItemGroup>
   <ItemGroup>

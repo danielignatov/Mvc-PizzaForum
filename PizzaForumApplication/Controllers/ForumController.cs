@@ -5,20 +5,15 @@
     using Services;
     using SimpleHttpServer.Models;
     using SimpleMVC.Attributes.Methods;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using SimpleMVC.Controllers;
 
     public class ForumController : Controller
     {
-        private ForumService service;
+        private ForumService forumService;
 
         public ForumController()
         {
-            this.service = new ForumService();
+            this.forumService = new ForumService();
         }
 
         // Login
@@ -31,7 +26,7 @@
         [HttpPost]
         public IActionResult Login(HttpResponse response, HttpSession session, LoginUserBindingModel lubm)
         {
-            var user = this.service.GetCorrespondingLoginUser(lubm);
+            var user = this.forumService.GetCorrespondingLoginUser(lubm);
 
             if (user == null)
             {
@@ -39,7 +34,7 @@
                 return null;
             }
 
-            service.LoginUser(user, session.Id);
+            forumService.LoginUser(user, session.Id);
 
             this.Redirect(response, "/home/topics");
             return null;
@@ -55,15 +50,23 @@
         [HttpPost]
         public IActionResult Register(HttpResponse response, RegisterUserBindingModel rubm)
         {
-            if (this.service.IsRegisterBindingModelValid(rubm))
+            if (this.forumService.IsRegisterBindingModelValid(rubm))
             {
-                service.RegisterUserFromBindingModel(rubm);
+                forumService.RegisterUserFromBindingModel(rubm);
 
                 this.Redirect(response, "/forum/login");
                 return null;
             }
 
             return View();
+        }
+
+        // Logout
+        [HttpGet]
+        public void Logout(HttpResponse response, HttpSession session)
+        {
+            this.forumService.Logout(response, session.Id);
+            this.Redirect(response, "/home/topics");
         }
     }
 }

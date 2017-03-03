@@ -13,11 +13,7 @@ namespace PizzaForumApplication.ViewModels
             this.Topics = new List<TopicViewModel>();
         }
 
-        public bool IsUserLogged { get; set; }
-
-        public string Username { get; set; }
-
-        public int UserId { get; set; }
+        public NavbarViewModel Navbar { get; set; }
 
         public List<TopicViewModel> Topics { get; set; }
     }

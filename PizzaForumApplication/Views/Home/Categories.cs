@@ -1,20 +1,20 @@
-﻿namespace PizzaForumApplication.Views.Categories
+﻿namespace PizzaForumApplication.Views.Home
 {
+    using PizzaForumApplication.ViewModels;
     using SimpleMVC.Interfaces.Generic;
     using System.IO;
     using System.Text;
-    using ViewModels;
 
-    public class All : IRenderable<CategoriesAllViewModel>
+    public class Categories : IRenderable<HomeCategoriesViewModel>
     {
-        public CategoriesAllViewModel Model { get; set; }
+        public HomeCategoriesViewModel Model { get; set; }
 
         public string Render()
         {
-            StringBuilder categoriesAllPageBuilder = new StringBuilder();
+            StringBuilder homeCategoriesPageBuilder = new StringBuilder();
 
             // Header
-            categoriesAllPageBuilder.Append(File.ReadAllText(Constants.Constants.ContentPath + Constants.Constants.HeaderPath));
+            homeCategoriesPageBuilder.Append(File.ReadAllText(Constants.Constants.ContentPath + Constants.Constants.HeaderPath));
 
             // Navigation
             string nav;
@@ -42,25 +42,25 @@
                 nav = File.ReadAllText(Constants.Constants.ContentPath + Constants.Constants.NavbarNotLoggedPath);
             }
 
-            categoriesAllPageBuilder.Append(nav);
+            homeCategoriesPageBuilder.Append(nav);
 
-            // Site Content - Categories (Admin view)
+            // Site Content - Categories
             StringBuilder categoriesBuilder = new StringBuilder();
-            string container = File.ReadAllText(Constants.Constants.ContentPath + Constants.Constants.AdminCategoriesPath);
+            string container = File.ReadAllText(Constants.Constants.ContentPath + Constants.Constants.ContainerPath);
 
             foreach (var category in Model.Categories)
             {
-                categoriesBuilder.Append($"<tr><td><a href=\"/categories/topics?categoryName={category.CategoryName}\">{category.CategoryName}</a></td><td><a href=\"/categories/edit?id={category.CategoryId}\" class=\"btn btn-primary\"/>Edit</a></td><td><a href=\"/categories/delete?id={category.CategoryId}\" class=\"btn btn-danger\"/>Delete</a></td></tr>");
+                categoriesBuilder.Append($"<div class=\"thumbnail\"><h4><strong><a href=\"/categories/topics?categoryname={category.CategoryName}\">{category.CategoryName}</a><strong></h4><p>Category</p></div>");
             }
 
-            container = container.Replace("##categories##", categoriesBuilder.ToString());
+            container = container.Replace("##content##", categoriesBuilder.ToString());
 
-            categoriesAllPageBuilder.Append(container);
+            homeCategoriesPageBuilder.Append(container);
 
             // Footer
-            categoriesAllPageBuilder.Append(File.ReadAllText(Constants.Constants.ContentPath + Constants.Constants.FooterPath));
+            homeCategoriesPageBuilder.Append(File.ReadAllText(Constants.Constants.ContentPath + Constants.Constants.FooterPath));
 
-            return categoriesAllPageBuilder.ToString();
+            return homeCategoriesPageBuilder.ToString();
         }
     }
 }

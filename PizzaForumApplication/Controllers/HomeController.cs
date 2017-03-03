@@ -40,5 +40,14 @@
 
             return View(viewModel);
         }
+
+        // Categories
+        [HttpGet]
+        public IActionResult<HomeCategoriesViewModel> Categories(HttpSession session)
+        {
+            HomeCategoriesViewModel hcvm = this.homeService.GenerateHomeCategoriesViewModel(session);
+
+            return View(hcvm);
+        }
     }
 }

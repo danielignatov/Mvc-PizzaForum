@@ -6,6 +6,8 @@
     using System.Linq;
     using System;
     using System.Text.RegularExpressions;
+    using SimpleHttpServer.Models;
+    using SimpleHttpServer.Utilities;
 
     public class ForumService : Service
     {
@@ -34,6 +36,17 @@
 
             this.Context.Logins.Add(login);
             this.Context.SaveChanges();
+        }
+
+        public void Logout(HttpResponse response, string sessionId)
+        {
+            Login currentLogin = this.Context.Logins.FirstOrDefault(login => login.SessionId == sessionId);
+            currentLogin.IsActive = false;
+            Context.SaveChanges();
+
+            var session = SessionCreator.Create();
+            var sessionCookie = new Cookie("sessionId", session.Id + "; HttpOnly; path=/");
+            response.Header.AddCookie(sessionCookie);
         }
 
         public bool IsRegisterBindingModelValid(RegisterUserBindingModel rubm)
