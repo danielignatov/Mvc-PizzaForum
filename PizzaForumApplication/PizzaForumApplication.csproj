@@ -57,6 +57,7 @@
     <Compile Include="AppStart.cs" />
     <Compile Include="BindingModels\LoginUserBindingModel.cs" />
     <Compile Include="BindingModels\NewCategoryBindingModel.cs" />
+    <Compile Include="BindingModels\NewReplyBindingModel.cs" />
     <Compile Include="BindingModels\NewTopicBindingModel.cs" />
     <Compile Include="BindingModels\RegisterUserBindingModel.cs" />
     <Compile Include="BindingModels\RenameCategoryBindingModel.cs" />
@@ -83,11 +84,13 @@
     <Compile Include="Services\TopicsService.cs" />
     <Compile Include="ViewModels\CategoriesAllViewModel.cs" />
     <Compile Include="ViewModels\CategoriesEditViewModel.cs" />
+    <Compile Include="ViewModels\CategorisTopicsViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\ForumProfileViewModel.cs" />
     <Compile Include="ViewModels\HomeCategoriesViewModel.cs" />
     <Compile Include="ViewModels\HomeTopicsViewModel.cs" />
     <Compile Include="ViewModels\NavbarViewModel.cs" />
+    <Compile Include="ViewModels\TopicsDetailsViewModel.cs" />
     <Compile Include="ViewModels\TopicsNewViewModel.cs" />
     <Compile Include="ViewModels\ReplyViewModel.cs" />
     <Compile Include="ViewModels\TopicViewModel.cs" />
@@ -95,6 +98,7 @@
     <Compile Include="Views\Categories\All.cs" />
     <Compile Include="Views\Categories\Edit.cs" />
     <Compile Include="Views\Categories\New.cs" />
+    <Compile Include="Views\Categories\Topics.cs" />
     <Compile Include="Views\Forum\Login.cs" />
     <Compile Include="Views\Forum\Logout.cs" />
     <Compile Include="Views\Forum\Profile.cs" />

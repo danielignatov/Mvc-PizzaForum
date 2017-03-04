@@ -83,6 +83,82 @@
             this.Context.SaveChanges();
         }
 
+        public TopicsDetailsViewModel GenerateTopicsDetailsViewModel(HttpSession session, int id)
+        {
+            TopicsDetailsViewModel tdvm = new TopicsDetailsViewModel();
+            NavbarViewModel nvm = new NavbarViewModel();
+            TopicViewModel tvm = new TopicViewModel();
+
+            if (this.signInManagerService.IsAuthenticated(session))
+            {
+                var user = this.signInManagerService.GetAuthenticatedUser(session);
+
+                nvm.LoggedIn = true;
+                nvm.UserId = user.Id;
+                nvm.Username = user.Username;
+                nvm.UserLevel = (int)user.Role;
+            }
+            else
+            {
+                nvm.LoggedIn = false;
+            }
+
+            tdvm.Navbar = nvm;
+
+            var topic = this.Context.Topics.Where(tid => tid.Id == id).FirstOrDefault();
+
+            // Generate tvm
+            UserViewModel uvm = new UserViewModel()
+            {
+                Username = topic.Author.Username,
+                UserId = topic.Author.Id
+            };
+
+            tvm.Author = uvm;
+
+            CategoryViewModel cvm = new CategoryViewModel()
+            {
+                CategoryName = topic.Category.Name,
+                CategoryId = topic.Category.Id
+            };
+
+            tvm.Category = cvm;
+
+            tvm.PublishedOn = topic.PublishDate;
+
+            tvm.TopicId = topic.Id;
+
+            tvm.TopicName = topic.Title;
+
+            tvm.Content = topic.Content;
+
+            List<ReplyViewModel> lrvm = new List<ReplyViewModel>();
+
+            foreach (var reply in topic.Replies)
+            {
+                ReplyViewModel rvm = new ReplyViewModel();
+
+                UserViewModel replyUserViewModel = new UserViewModel()
+                {
+                    Username = reply.Author.Username,
+                    UserId = reply.Author.Id
+                };
+
+                rvm.Content = reply.Content;
+                rvm.User = replyUserViewModel;
+                rvm.PublishedOn = reply.PublishDate;
+                rvm.ImgUrl = reply.ImgUrl;
+
+                lrvm.Add(rvm);
+            }
+
+            tvm.Replies = lrvm;
+
+            tdvm.Topic = tvm;
+
+            return tdvm;
+        }
+
         public bool CanThisUserDeleteGivenTopic(HttpSession session, int id)
         {
             if (this.signInManagerService.GetAuthenticatedUser(session).Topics.Any(tid => tid.Id == id))
@@ -91,6 +167,38 @@
             }
 
             if (this.signInManagerService.GetAuthenticatedUser(session).Role == Enums.UserRole.Administrator)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public void AddNewReplyToTopic(HttpSession session, NewReplyBindingModel nrbm, int id)
+        {
+            User user = this.signInManagerService.GetAuthenticatedUser(session);
+
+            Reply reply = new Reply();
+
+            reply.Author = user;
+            reply.Content = nrbm.Content;
+            reply.PublishDate = DateTime.Now;
+
+            if (nrbm.ImgUrl != "")
+            {
+                reply.ImgUrl = nrbm.ImgUrl;
+            }
+
+            reply.Topic = this.Context.Topics.Where(tid => tid.Id == id).FirstOrDefault();
+
+            this.Context.Replies.Add(reply);
+
+            this.Context.SaveChanges();
+        }
+
+        public bool IsNewReplyBindingModelValid(HttpSession session, NewReplyBindingModel nrbm, int id)
+        {
+            if (this.Context.Topics.Any(tid => tid.Id == id))
             {
                 return true;
             }

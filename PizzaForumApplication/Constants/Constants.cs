@@ -27,5 +27,7 @@
         public static string NewTopicButtonPath = $"/topic-new-button.html";
 
         public static string ProfilePagePath = $"/profile.html";
+
+        public static string ReplyFormPath = $"/topic-details-reply-form.html";
     }
 }

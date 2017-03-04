@@ -176,5 +176,64 @@
             this.Context.Categories.Remove(this.Context.Categories.Find(id));
             this.Context.SaveChanges();
         }
+
+        public CategorisTopicsViewModel GenerateCategorisTopicsViewModel(HttpSession session, string categoryname)
+        {
+            CategorisTopicsViewModel ctvm = new CategorisTopicsViewModel();
+            NavbarViewModel nvm = new NavbarViewModel();
+
+            if (this.signInManagerService.IsAuthenticated(session))
+            {
+                User user = this.signInManagerService.GetAuthenticatedUser(session);
+
+                nvm.LoggedIn = true;
+                nvm.Username = user.Username;
+                nvm.UserId = user.Id;
+                nvm.UserLevel = (int)user.Role;
+            }
+            else
+            {
+                nvm.LoggedIn = false;
+            }
+
+            ctvm.Navbar = nvm;
+
+            foreach (var topic in this.Context.Topics.OrderByDescending(t => t.PublishDate).Where(cn => cn.Category.Name.ToLower() == categoryname.ToLower()))
+            {
+                TopicViewModel topicViewModel = new TopicViewModel();
+                UserViewModel userViewModel = new UserViewModel();
+                CategoryViewModel categoryViewModel = new CategoryViewModel();
+                List<ReplyViewModel> replyViewModelList = new List<ReplyViewModel>();
+
+                userViewModel.Username = topic.Author.Username;
+                userViewModel.UserId = topic.Author.Id;
+
+                categoryViewModel.CategoryName = topic.Category.Name;
+                categoryViewModel.CategoryId = topic.Category.Id;
+
+                foreach (var reply in topic.Replies)
+                {
+                    ReplyViewModel replyViewModel = new ReplyViewModel();
+                    UserViewModel replyUserViewModel = new UserViewModel();
+
+                    replyUserViewModel.Username = reply.Author.Username;
+                    replyUserViewModel.UserId = reply.Author.Id;
+
+                    replyViewModel.User = replyUserViewModel;
+                    replyViewModelList.Add(replyViewModel);
+                }
+
+                topicViewModel.Author = userViewModel;
+                topicViewModel.Category = categoryViewModel;
+                topicViewModel.Replies = replyViewModelList;
+                topicViewModel.TopicId = topic.Id;
+                topicViewModel.TopicName = topic.Title;
+                topicViewModel.PublishedOn = topic.PublishDate;
+
+                ctvm.Topics.Add(topicViewModel);
+            }
+
+            return ctvm;
+        }
     }
 }

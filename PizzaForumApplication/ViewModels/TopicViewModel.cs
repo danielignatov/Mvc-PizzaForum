@@ -14,6 +14,8 @@
 
         public int TopicId { get; set; }
 
+        public string Content { get; set; }
+
         public UserViewModel Author { get; set; }
 
         public DateTime PublishedOn { get; set; }

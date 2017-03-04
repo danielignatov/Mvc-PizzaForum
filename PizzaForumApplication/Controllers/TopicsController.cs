@@ -73,5 +73,28 @@ namespace PizzaForumApplication.Controllers
             this.Redirect(response, "/home/topics");
             return null;
         }
+
+        // Details
+        [HttpGet]
+        public IActionResult<TopicsDetailsViewModel> Details(HttpSession session, int id)
+        {
+            TopicsDetailsViewModel tdvm = this.topicsService.GenerateTopicsDetailsViewModel(session, id);
+
+            return this.View(tdvm);
+        }
+
+        [HttpPost]
+        public void Details(HttpResponse response, HttpSession session, NewReplyBindingModel nrbm, int id)
+        {
+            if (this.signInManagerService.IsAuthenticated(session))
+            {
+                if (this.topicsService.IsNewReplyBindingModelValid(session, nrbm, id))
+                {
+                    this.topicsService.AddNewReplyToTopic(session, nrbm, id);
+                }
+            }
+
+            this.Redirect(response, $"/topics/details?id={id}");
+        }
     }
 }

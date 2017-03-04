@@ -148,5 +148,14 @@
             this.Redirect(response, "/home/topics");
             return null;
         }
+
+        // Topics
+        [HttpGet]
+        public IActionResult<CategorisTopicsViewModel> Topics(HttpSession session, string categoryname)
+        {
+            CategorisTopicsViewModel ctvm = this.categoriesService.GenerateCategorisTopicsViewModel(session, categoryname);
+
+            return View(ctvm);
+        }
     }
 }
